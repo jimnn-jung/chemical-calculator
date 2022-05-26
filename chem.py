@@ -26,7 +26,6 @@ class Molecule:
 
     def __init__(self, symbol):
         self.symbol = symbol
-        self.molar_mass = calculate_mass()
 
     def calculate_mass(self):
         """Calculates the molar mass with helper methods."""
@@ -34,15 +33,19 @@ class Molecule:
         mass = 0
         for elem in composition_dict:
             mass += Element.mass_dictionary[elem]
+        self.molar_mass = mass
         return mass
 
     def decompose_symbol(self):
+        """Given the list from split_symbol, organizes the chemical formula into a dictionary with Element symbols as keys and the counts as values."""
         split_list = split_symbol()
         composition = {}
         # Iterate through split_list to add to dictionary
         self.composition = composition
+        return composition
 
     def split_symbol(self):
-        # Use RegEx to split the symbol into chunks
+        """Given the chemical formula, returns a list of chunks an Element and its count using RegEx."""
         symbol_copy = self.symbol
         chunks = []
+        return chunks
