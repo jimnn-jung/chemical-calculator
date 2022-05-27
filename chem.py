@@ -31,6 +31,10 @@ class Molecule:
         """Getter method of a Molecule's formula."""
         return self.formula
 
+    def get_composition(self):
+        """Getter method of a Molecule's composition."""
+        return self.composition
+
     def calculate_mass(self):
         """Calculates the molar mass with helper methods."""
         composition_dict = decompose_formula()
@@ -42,9 +46,16 @@ class Molecule:
 
     def decompose_formula(self):
         """Given the list from split_formula, organizes the chemical formula into a dictionary with Element symbols as keys and the counts as values."""
-        split_list = split_formula()
+        split_list = self.split_formula()
         composition = {}
-        # Iterate through split_list to add to dictionary
+        for chunk in split_list:
+            num = re.search(r"\d+", chunk)
+            if num:
+                factor = int(num.group())
+            else:
+                factor = 1
+            elem = re.search(r"([A-Z][a-z]*)", chunk).group()
+            composition[elem] = composition.get(elem, 0) + factor
         self.composition = composition
         return composition
 

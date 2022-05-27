@@ -30,4 +30,11 @@ def test_split_polyatomic():
     calcium_phos_actual = calcium_phos.split_formula()
     assert calcium_phos_expected == calcium_phos_actual, "Incorrect splitting of Ca3(PO4)2"
 
+def test_decompose():
+    """Checks if the program organizes the split list into a composition dictionary correctly."""
+    ca_phos = Molecule("Ca3(PO4)2")
+    ca_phos_expected = {"P": 2, "O": 8, "Ca": 3}
+    ca_phos_actual = ca_phos.decompose_formula()
+    assert ca_phos_expected == ca_phos_actual, "Incorrect dictionary"
+
 setup_test()
