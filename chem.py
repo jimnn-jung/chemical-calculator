@@ -26,6 +26,8 @@ class Molecule:
 
     def __init__(self, formula):
         self.formula = formula
+        self.composition = self.decompose_formula()
+        self.molar_mass = self.calculate_molar_mass()
 
     def get_formula(self):
         """Getter method of a Molecule's formula."""
@@ -35,13 +37,16 @@ class Molecule:
         """Getter method of a Molecule's composition."""
         return self.composition
 
-    def calculate_mass(self):
+    def get_molar_mass(self):
+        """Getter method of a Molecule's molar mass."""
+        return self.molar_mass
+
+    def calculate_molar_mass(self):
         """Calculates the molar mass with helper methods."""
-        composition_dict = decompose_formula()
+        composition_dict = self.get_composition()
         mass = 0
         for elem in composition_dict:
-            mass += Element.mass_dictionary[elem]
-        self.molar_mass = mass
+            mass += Element.mass_dictionary[elem] * composition_dict[elem]
         return mass
 
     def decompose_formula(self):
@@ -56,7 +61,6 @@ class Molecule:
                 factor = 1
             elem = re.search(r"([A-Z][a-z]*)", chunk).group()
             composition[elem] = composition.get(elem, 0) + factor
-        self.composition = composition
         return composition
 
     def split_formula(self):

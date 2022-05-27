@@ -34,7 +34,14 @@ def test_decompose():
     """Checks if the program organizes the split list into a composition dictionary correctly."""
     ca_phos = Molecule("Ca3(PO4)2")
     ca_phos_expected = {"P": 2, "O": 8, "Ca": 3}
-    ca_phos_actual = ca_phos.decompose_formula()
+    ca_phos_actual = ca_phos.get_composition()
     assert ca_phos_expected == ca_phos_actual, "Incorrect dictionary"
+
+def test_mass():
+    """Checks if the program correctly calculates the molar mass of a Molecule."""
+    water = Molecule("H2O")
+    water_mass_expected = 18.02
+    water_mass_actual = water.get_molar_mass()
+    assert water_mass_expected == water_mass_actual, "Incorrect molar mass"
 
 setup_test()
