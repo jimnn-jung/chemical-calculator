@@ -48,4 +48,5 @@ class Molecule:
         """Given the chemical formula, returns a list of chunks an Element and its count using RegEx."""
         symbol_copy = self.symbol
         chunks = []
+        chunks.extend(re.findall(r"([A-Z][a-z]?\d*)", symbol_copy))
         return chunks
