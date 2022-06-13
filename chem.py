@@ -83,3 +83,8 @@ class Molecule:
             formula_copy = formula_copy[:first_opening] + formula_copy[(first_opening + len(poly_group)):]
         chunks.extend(re.findall(r"([A-Z][a-z]?\d*)", formula_copy))
         return chunks
+
+    def get_mass_composition(self, symbol):
+        """Calculates mass composition of symbol in the Moleculem, in percentage. The symbol must be a valid one of an Element that makes up this Molecule."""
+        comp_copy = self.get_composition()
+        return round(comp_copy[symbol] * Element.mass_dictionary[symbol] / self.get_molar_mass(), 4) * 100
