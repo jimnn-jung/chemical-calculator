@@ -8,6 +8,7 @@ def setup_test():
     carbon = Element("C", 12.01)
     calcium = Element("Ca", 40.08)
     phosphate = Element("P", 94.97)
+    chlorine = Element("Cl", 35.45)
 
     print(Element.mass_dictionary)
 
@@ -43,5 +44,12 @@ def test_mass():
     water_mass_expected = 18.02
     water_mass_actual = water.get_molar_mass()
     assert water_mass_expected == water_mass_actual, "Incorrect molar mass"
+
+def test_mass_composition():
+    """Checks if the program correctly calculates the mass composition of atoms in a Molecule."""
+    acid = Molecule("HCl")
+    acid_oxy_expected = round(35.45 / 36.46, 2)
+    acid_oxy_actual = acid.get_mass_composition('Cl')
+    assert acid_oxy_expected == acid_oxy_actual, "Incorrect mass composition of oxygen"
 
 setup_test()
