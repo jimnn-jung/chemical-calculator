@@ -15,7 +15,7 @@ class Element:
 
     def get_mass(self):
         """Getter method of an Element's mass."""    
-        return Element.mass_dictionary[symbol]
+        return Element.mass_dictionary[self.symbol]
     
     def set_mass(self, new_mass):
         """Setter method that allows the user to change the mass."""
